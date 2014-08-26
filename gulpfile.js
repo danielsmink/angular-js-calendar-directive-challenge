@@ -15,7 +15,10 @@ var gulp = require('gulp'),
   deploy = require('gulp-gh-pages'),
   karma = require('gulp-karma'),
   paths = {
-    scripts: ['./app/**/*.js', '!./app/**/*Spec.js'],
+    scripts: ['./app/calendar-demo.module.js',
+      './app/**/*.js',
+      '!./app/**/*Spec.js',
+      '!./app/utilities/**/*'],
     jsCompiled: 'public/js',
     scss: './app/assets/scss/**/*.scss',
     scssDir: './app/assets/scss',
@@ -58,6 +61,13 @@ gulp.task('jshint', false, function () {
     .pipe(jshint.reporter('fail'));
 });
 
+// Copy utilities
+gulp.task('copy-utils',false , function() {
+  return gulp.src('./app/utilities/**/*')
+    .pipe(gulp.dest('./public/js/utilities'))
+    .pipe(reload({stream:true}));
+});
+
 // Copy index.html
 gulp.task('copy-index',false , function() {
   return gulp.src(paths.indexFile)
@@ -76,7 +86,7 @@ gulp.task('copy-templates', 'Copies templates and index.html to public folder', 
 gulp.task('js', 'Minifies JavaScript files', ['jshint'], function () {
   return gulp.src(paths.scripts)
     .pipe(sourcemaps.init())
-    .pipe(concat('country-capitals.min.js', {newLine: ';'}))
+    .pipe(concat('calendar-demo.min.js', {newLine: ';'}))
     // Annotate before uglify so the code get's min'd properly.
     .pipe(ngAnnotate({
       // true helps add where @ngInject is not used. It infers.
@@ -99,7 +109,7 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 });
 
 // Default task
-gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'compass', 'test', 'js', 'browser-sync']);
+gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'copy-utils', 'compass', 'js', 'browser-sync']);
 
 gulp.task('test', function() {
   // Be sure to return the stream

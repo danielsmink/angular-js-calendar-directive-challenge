@@ -1,3 +1,8 @@
-angular.module('calendarDemoApp', []);
+/**
+ * Calendar directive demonstration
+ */
 
-// your controller and directive code go here
+(function() {
+  angular
+    .module('calendarDemoApp', []);
+})();
