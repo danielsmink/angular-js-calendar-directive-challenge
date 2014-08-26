@@ -26,11 +26,10 @@
     };
 
     // When something changes in the date object change the calendarDate that we pass to the directive
-    $scope.$watchCollection('date', function(newDate, oldDate) {
-      if(oldDate === newDate) {
-        newDate = oldDate;
+    $scope.$watchCollection('vm.date', function(newDate, oldDate) {
+      if(newDate && oldDate) {
+        vm.calendarDate = new Date(vm.date.year, vm.date.month, 1);
       }
-      vm.calendarDate = new Date(newDate.year, newDate.month, 1);
     });
 
     // Array of months
