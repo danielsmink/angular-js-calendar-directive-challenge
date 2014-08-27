@@ -109,7 +109,7 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 });
 
 // Default task
-gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'copy-utils', 'compass', 'js', 'browser-sync']);
+gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'copy-utils', 'compass', 'test', 'js', 'browser-sync']);
 
 gulp.task('test', function() {
   // Be sure to return the stream
@@ -125,7 +125,7 @@ gulp.task('test', function() {
 });
 
 // Deploy task
-gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['js'], function () {
+gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['test', 'js'], function () {
   return gulp.src('./public/**/*')
     .pipe(deploy());
 });
