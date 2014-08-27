@@ -125,7 +125,7 @@ gulp.task('test', function() {
 });
 
 // Deploy task
-gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['test', 'js'], function () {
+gulp.task('deploy', 'Used to deploy the public dir to gh-pages branch', ['js'], function () {
   return gulp.src('./public/**/*')
     .pipe(deploy());
 });
