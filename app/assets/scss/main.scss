@@ -1,5 +1,9 @@
 /* your css code goes here */
 
+h1 {
+    text-align: center;
+}
+
 nav {
     background: #000;
     margin: 0 auto;
@@ -16,4 +20,8 @@ nav {
     height: 90px;
     padding: 5px;
     width: 88px;
+}
+
+.not-this-month {
+    background: #eaeaea;
 }

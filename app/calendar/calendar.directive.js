@@ -30,13 +30,14 @@
 
       // Set initial range
       scope.range = CalendarRange.getMonthlyRange(scope.calendarDate);
-
+      scope.currentMonth = scope.calendarDate.getMonth();
       // Watch for changes
       scope.$watch(function () {
         return scope.calendarDate;
       }, function(newDate, oldDate) {
         if ( newDate !== oldDate ) {
           scope.range = CalendarRange.getMonthlyRange(newDate);
+          scope.currentMonth = newDate.getMonth();
         }
       });
 
