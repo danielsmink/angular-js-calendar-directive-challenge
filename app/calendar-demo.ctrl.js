@@ -25,9 +25,14 @@
       month: month
     };
 
+    // Set initial value
+    vm.calendarDate = new Date(vm.date.year, vm.date.month, 1);
+
     // When something changes in the date object change the calendarDate that we pass to the directive
-    $scope.$watchCollection('vm.date', function(newDate, oldDate) {
-      if(newDate && oldDate) {
+    $scope.$watchCollection(function () {
+      return vm.date;
+    }, function(newDate, oldDate) {
+      if ( newDate !== oldDate ) {
         vm.calendarDate = new Date(vm.date.year, vm.date.month, 1);
       }
     });
@@ -37,7 +42,7 @@
     'may,june,july,august,' +
     'september,october,november,december').split(',');
 
-    // Build array of years
+    // Build array of years (20 years in the past and 20 years in the future)
     for(var i=past;i<=future;i++) {
       years.push(i);
     }
