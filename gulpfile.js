@@ -6,6 +6,8 @@ var gulp = require('gulp'),
   compass = require('gulp-compass'),
   jshint = require('gulp-jshint'),
   concat = require('gulp-concat'),
+  ngHtml2Js = require('gulp-ng-html2js'),
+  minifyHtml = require('gulp-minify-html'),
   ngAnnotate = require('gulp-ng-annotate'),
   uglify = require('gulp-uglify'),
   sourcemaps = require('gulp-sourcemaps'),
@@ -17,7 +19,7 @@ var gulp = require('gulp'),
   paths = {
     scripts: ['./app/calendar-demo.module.js',
       './app/**/*.js',
-      '!./app/**/*Spec.js',
+      '!./app/**/*.spec.js',
       '!./app/utilities/**/*'],
     jsCompiled: 'public/js',
     scss: './app/assets/scss/**/*.scss',
@@ -75,11 +77,21 @@ gulp.task('copy-index',false , function() {
     .pipe(reload({stream:true}));
 });
 
-// Copy templates
-gulp.task('copy-templates', 'Copies templates and index.html to public folder', ['copy-index'], function() {
-  return gulp.src(paths.templates)
+gulp.task('partials', ['copy-index'], function () {
+  gulp.src(paths.templates)
+    .pipe(minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true
+    }))
+    .pipe(ngHtml2Js({
+      moduleName: 'calendarDemoApp',
+      declareModule: false
+    }))
+    .pipe(concat('partials.min.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('./public/js/partials'))
-    .pipe(reload({stream:true}));
+    .pipe(reload({stream: true}));
 });
 
 // Run jshint first
@@ -109,7 +121,8 @@ gulp.task('watch', 'Watches JavaScript and sass files', function() {
 });
 
 // Default task
-gulp.task('default', 'The default task :-)', ['watch', 'copy-templates', 'copy-utils', 'compass', 'test', 'js', 'browser-sync']);
+gulp.task('default', 'The default task :-)', ['watch',
+  'partials', 'copy-utils', 'compass', 'test', 'js', 'browser-sync']);
 
 gulp.task('test', function() {
   // Be sure to return the stream
