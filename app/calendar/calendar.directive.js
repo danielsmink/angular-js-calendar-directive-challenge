@@ -4,6 +4,7 @@
  * @example <calendar></calendar>
  */
 
+/* global CalendarRange:false */
 (function () {
   angular
     .module('calendarDemoApp')
@@ -14,7 +15,10 @@
     var directive = {
       link: link,
       templateUrl: './js/partials/calendar/calendar.template.html',
-      restrict: 'E'
+      restrict: 'E',
+      scope: {
+        calendarDate: '=date'
+      }
     };
 
     return directive;

@@ -2,7 +2,6 @@
  * Calendar directive demo controller
  */
 
-/* global CalendarRange:false */
 (function() {
   angular
     .module('calendarDemoApp')
