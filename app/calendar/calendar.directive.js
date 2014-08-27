@@ -10,6 +10,7 @@
     .module('calendarDemoApp')
     .directive('calendar', calendar);
 
+  /* @ngInject */
   function calendar (CalendarRange) {
 
     // Setup directive object and scope
@@ -24,7 +25,20 @@
 
     return directive;
 
+    /* @ngInject */
     function link (scope, element, attrs) {
+
+      // Set initial range
+      scope.range = CalendarRange.getMonthlyRange(scope.calendarDate);
+
+      // Watch for changes
+      scope.$watch(function () {
+        return scope.calendarDate;
+      }, function(newDate, oldDate) {
+        if ( newDate !== oldDate ) {
+          scope.range = CalendarRange.getMonthlyRange(newDate);
+        }
+      });
 
     }
   }
