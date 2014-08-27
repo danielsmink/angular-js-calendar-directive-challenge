@@ -30,8 +30,9 @@
 
       // Set initial range
       scope.range = CalendarRange.getMonthlyRange(scope.calendarDate);
+      // Set currentMonth so we can check if days are from the previous or next month
       scope.currentMonth = scope.calendarDate.getMonth();
-      // Watch for changes
+      // Watch for changes and update scope variables
       scope.$watch(function () {
         return scope.calendarDate;
       }, function(newDate, oldDate) {
