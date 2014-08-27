@@ -16,7 +16,7 @@
     // Setup directive object and scope
     var directive = {
       link: link,
-      templateUrl: './js/partials/calendar/calendar.template.html',
+      templateUrl: 'calendar/calendar.template.html',
       restrict: 'E',
       scope: {
         calendarDate: '=date'

@@ -13,9 +13,15 @@ describe('calendar', function() {
 
   beforeEach(inject(function($rootScope, $compile) {
 
+    var today = new Date(),
+        year = today.getFullYear(),
+        month = today.getMonth();
+
+    $rootScope.date = new Date(year, month, 1);
+
     // Set the mock HTML
     html = '';
-    html += '<calendar date="calendar.calendarDate>';
+    html += '<calendar date="date">';
     html += '</calendar>';
 
     // Create a new scope
@@ -33,9 +39,10 @@ describe('calendar', function() {
   }));
 
   it('should render the element correctly', function(){
-
     // Expect to find a div with the the class calendar-grid
     expect(element.children('.calendar-grid').length).toBe(1);
+    // Expect calendar days to be there
+    expect(element.children('.calendar-grid').children('.calendar-day').length).toBeGreaterThan(1);
   });
 
 });
