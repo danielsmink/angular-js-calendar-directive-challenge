@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'app),
+    basePath: '',
 
 
     // frameworks to use
@@ -15,6 +15,8 @@ module.exports = function(config) {
       'node_modules/jquery/dist/jquery.min.js',
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js',
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-mocks.js',
+      'app/utilities/calendar-range/calendarRange.js', // Load the calendarRange class
+      'app/calendar-demo.module.js', // Load the main module first
       'app/**/*.js', // this will pick up both spec and app
       'app/**/*.html' // for our directive templates
     ],
@@ -62,7 +64,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
