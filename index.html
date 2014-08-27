@@ -7,22 +7,26 @@
 <body data-ng-controller="calendarDemo as calendar">
 <h1>Calendar directive by Shorkan</h1>
 <nav>
-    <select data-ng-model="calendar.date.month">
-        <option
-            data-ng-repeat="month in calendar.months"
-            value="{{ $index }}"
-            data-ng-selected="$index == calendar.date.month">
-            {{ month }}
-        </option>
-    </select>
-    <select data-ng-model="calendar.date.year">
-        <option
-            data-ng-repeat="year in calendar.years"
-            value="{{ year }}"
-            data-ng-selected="year == calendar.date.year">
-            {{ year }}
-        </option>
-    </select>
+    <div class="select-style">
+        <select data-ng-model="calendar.date.month">
+            <option
+                data-ng-repeat="month in calendar.months"
+                value="{{ $index }}"
+                data-ng-selected="$index == calendar.date.month">
+                {{ month }}
+            </option>
+        </select>
+    </div>
+    <div class="select-style">
+        <select data-ng-model="calendar.date.year">
+            <option
+                data-ng-repeat="year in calendar.years"
+                value="{{ year }}"
+                data-ng-selected="year == calendar.date.year">
+                {{ year }}
+            </option>
+        </select>
+    </div>
 </nav>
 
 <calendar date="calendar.calendarDate"></calendar>
@@ -30,5 +34,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
 <script type="text/javascript" src="./js/utilities/calendar-range/calendarRange.js"></script>
 <script type="text/javascript" src="./js/calendar-demo.min.js"></script>
+<script type="text/javascript" src="./js/partials/partials.min.js"></script>
 </body>
 </html>
