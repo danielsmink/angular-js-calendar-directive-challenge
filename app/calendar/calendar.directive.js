@@ -1,7 +1,7 @@
 /**
  * @desc calendar directive that renders a calendar
  * @file calendar.directive.js
- * @example <calendar></calendar>
+ * @example <calendar date="myDate"></calendar>
  */
 
 /* global CalendarRange:false */
@@ -10,8 +10,9 @@
     .module('calendarDemoApp')
     .directive('calendar', calendar);
 
-  function calendar () {
+  function calendar (CalendarRange) {
 
+    // Setup directive object and scope
     var directive = {
       link: link,
       templateUrl: './js/partials/calendar/calendar.template.html',
